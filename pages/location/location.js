@@ -104,6 +104,9 @@ Page({
     var cityListURL = app.globalData.doubanBase + app.globalData.loc_list_url;
     wx.request({
       url: cityListURL,
+      header: {
+        'content-type': 'application/xml'
+      },
       data: {
         "start": 0,
         "count": 500

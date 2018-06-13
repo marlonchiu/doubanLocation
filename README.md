@@ -6,4 +6,7 @@
 
 ### 概述
 - 数据来源：[豆瓣同城API](https://developers.douban.com/wiki/?title=event_v2)
+- 小程序请求豆瓣API报403解决方法(采用代理)
+   - 原因是小程序把豆瓣公开的api给禁掉了
+   - `https://api.douban.com` 代理为 `使用https://douban.uieee.com` 或 `http://t.yushu.im`
 

@@ -1,6 +1,6 @@
 <!--pages/location/splash/splash.wxml-->
 <view class="container">
-  <image class="slogan-paper" mode="aspectFill" src="/images/slogan_paper.jpg"></image>
+  <image class="slogan-paper" mode="aspectFill" src="https://i.loli.net/2018/06/13/5b20b3d4bca62.jpg"></image>
   <view class="session-content">
     <view class="slogan-wrapper">
       <text class="slogan-text">在这陌生的城市里</text>
