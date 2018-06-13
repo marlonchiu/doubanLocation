@@ -1,66 +1,87 @@
 // pages/location/event/action/action.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    "title": "",
+    "somecount": "",
+    "action": "join",
+    "beforeAnimation": "",
+    "wish": "",
+    "join": "",
+    "value": ""
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    var title = options.title;
+    var somecount = options.somecount;
+    var action = options.action;
+    this.setData({ "action": action, "title": title, "somecount": somecount });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-  
+    // 页面渲染完成
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-  
+    // 页面显示
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
-  
+    // 页面隐藏
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+    // 页面关闭
   },
+  /** 用户点击感兴趣，执行动画 */
+  handleWish: function (event) {
+    this.setData({ "action": "wish", "beforeAnimation": "left", "value": "" });
+    var animation = wx.createAnimation({
+      duration: 400,
+      timingFunction: 'linear'
+    })
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+    animation.translateX(375).step()
+
+    this.setData({
+      animationData: animation.export()
+    })
+    setTimeout(function () {
+      this.reset();
+    }.bind(this), 400);
   },
+  /** 用户点击要参加，执行动画 */
+  handleJoin: function (event) {
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+    this.setData({ "action": "join", "beforeAnimation": "right", "value": "" });
+    var animation = wx.createAnimation({
+      duration: 400,
+      timingFunction: 'linear'
+    })
+
+    animation.translateX(-375).step()
+
+    this.setData({
+      animationData: animation.export()
+    });
+
+    setTimeout(function () {
+      this.reset();
+    }.bind(this), 400);
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  /** 动画完成后，恢复状态 */
+  reset: function () {
+    var animation = wx.createAnimation({
+      duration: 0,
+      timingFunction: 'linear'
+    })
+    animation.translateX(0).step();
+    this.setData({ "beforeAnimation": "", animationData: animation.export() });
+  },
+  /** 用户点击确定 */
+  handleComfirm: function (event) {
+    wx.navigateBack();
+  },
+  /** 用户输入的文本 */
+  handleInput: function (event) {
+    var action = event.currentTarget.dataset.action;
+    var value = event.detail.value;
+    var readyData = {};
+    readyData[action] = value;
+    this.setData(readyData);
   }
 })
